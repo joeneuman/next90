@@ -21,6 +21,13 @@ form {
     flex-direction: column;
 }
 
+.header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
 label {
     font-size: 14px;
     color: #5f6368;
@@ -70,4 +77,38 @@ button {
 
 button:hover {
     background-color: #1558b0;
+}
+
+/* Flex Container for Fields */
+.flex-container {
+    display: flex;
+    align-items: center;
+    width: 100%; /* Make the container as wide as the other fields */
+}
+
+.flex-container input[type="text"],
+.flex-container input[type="email"] {
+    flex-grow: 1; /* Allow the input to take up the remaining space */
+}
+
+.set-default {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 10px;
+    text-align: center; /* Center the text */
+}
+
+.set-default span {
+    font-size: 12px;
+    margin-bottom: 5px;
+    line-height: 1.2; /* Adjust line height for better spacing */
+}
+
+.square-button {
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    flex-shrink: 0; /* Prevent the button from shrinking */
+    align-self: center; /* Align the button in the center */
 }
