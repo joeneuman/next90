@@ -32,6 +32,9 @@
             <label for="salesAgentEmail">Sales Agent Email:</label>
             <input type="email" id="salesAgentEmail" name="salesAgentEmail"><br><br>
 
+            <label for="salesAgentTitle">Sales Agent Title:</label>
+            <input type="text" id="salesAgentTitle" name="salesAgentTitle"><br><br>
+
             <button type="button" onclick="generateUrlAndRedirect()">Submit</button>
         </form>
     </div>
@@ -80,9 +83,10 @@
             const customerEmail = document.getElementById("customerEmail").value;
             const salesAgentName = document.getElementById("salesAgentName").value;
             const salesAgentEmail = document.getElementById("salesAgentEmail").value;
+            const salesAgentTitle = document.getElementById("salesAgentTitle").value;
 
             // Generate the full URL with all required data
-            const fullUrl = `${powerFormBaseUrl}&Month=${getCurrentMonth()}&Day=${getCurrentDay()}&YY=${getCurrentYear()}&Customer=${encodeURIComponent(customerBusinessName)}&customerAddress=${encodeURIComponent(customerAddress)}&Entity%20Type=${encodeURIComponent(entityType)}&Customer_UserName=${encodeURIComponent(signersName)}&CustomerUsername=${encodeURIComponent(signersName)}&title=${encodeURIComponent(title)}&Customer_Email=${encodeURIComponent(customerEmail)}&Sales_Agent_Name=${encodeURIComponent(salesAgentName)}&Sales_Agent_Email=${encodeURIComponent(salesAgentEmail)}`;
+            const fullUrl = `${powerFormBaseUrl}&Month=${getCurrentMonth()}&Day=${getCurrentDay()}&YY=${getCurrentYear()}&Customer=${encodeURIComponent(customerBusinessName)}&customerAddress=${encodeURIComponent(customerAddress)}&Entity%20Type=${encodeURIComponent(entityType)}&Customer_UserName=${encodeURIComponent(signersName)}&CustomerUsername=${encodeURIComponent(signersName)}&title=${encodeURIComponent(title)}&Customer_Email=${encodeURIComponent(customerEmail)}&Company_UserName=${encodeURIComponent(salesAgentName)}&CompanyUsername=${encodeURIComponent(salesAgentName)}&Company_Email=${encodeURIComponent(salesAgentEmail)}&Title0=${encodeURIComponent(salesAgentTitle)}`;
 
             // Redirect to the generated URL
             window.location.href = fullUrl;
