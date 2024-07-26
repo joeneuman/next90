@@ -8,32 +8,78 @@
     <div class="container">
         <h1>Master Services Agreement</h1>
         <form id="docusignForm">
-            <label for="customerName">Customer Business Name:</label>
-            <input type="text" id="customerName" name="customerName"><br><br>
+            <div class="header-row">
+                <label for="customerName">Customer Business Name:</label>
+                <span class="set-default-label">Set Default Local Only</span>
+            </div>
+            <div class="flex-container">
+                <input type="text" id="customerName" name="customerName">
+                <button type="button" class="square-button" onclick="setDefault('customerName')">&#x2714;</button>
+            </div><br><br>
 
-            <label for="customerAddress">Customer Address:</label>
-            <input type="text" id="customerAddress" name="customerAddress"><br><br>
+            <div class="header-row">
+                <label for="customerAddress">Customer Address:</label>
+            </div>
+            <div class="flex-container">
+                <input type="text" id="customerAddress" name="customerAddress">
+                <button type="button" class="square-button" onclick="setDefault('customerAddress')">&#x2714;</button>
+            </div><br><br>
 
-            <label for="entityType">Entity Type:</label>
-            <input type="text" id="entityType" name="entityType"><br><br>
+            <div class="header-row">
+                <label for="entityType">Entity Type:</label>
+            </div>
+            <div class="flex-container">
+                <input type="text" id="entityType" name="entityType">
+                <button type="button" class="square-button" onclick="setDefault('entityType')">&#x2714;</button>
+            </div><br><br>
 
-            <label for="signersName">Customer Signer's Name:</label>
-            <input type="text" id="signersName" name="signersName"><br><br>
+            <div class="header-row">
+                <label for="signersName">Customer Signer's Name:</label>
+            </div>
+            <div class="flex-container">
+                <input type="text" id="signersName" name="signersName">
+                <button type="button" class="square-button" onclick="setDefault('signersName')">&#x2714;</button>
+            </div><br><br>
 
-            <label for="title">Customer Signer's Title:</label>
-            <input type="text" id="title" name="title"><br><br>
+            <div class="header-row">
+                <label for="title">Customer Signer's Title:</label>
+            </div>
+            <div class="flex-container">
+                <input type="text" id="title" name="title">
+                <button type="button" class="square-button" onclick="setDefault('title')">&#x2714;</button>
+            </div><br><br>
 
-            <label for="customerEmail">Customer Signer's Email:</label>
-            <input type="email" id="customerEmail" name="customerEmail"><br><br>
+            <div class="header-row">
+                <label for="customerEmail">Customer Signer's Email:</label>
+            </div>
+            <div class="flex-container">
+                <input type="email" id="customerEmail" name="customerEmail">
+                <button type="button" class="square-button" onclick="setDefault('customerEmail')">&#x2714;</button>
+            </div><br><br>
 
-            <label for="salesAgentName">Sales Agent Name:</label>
-            <input type="text" id="salesAgentName" name="salesAgentName"><br><br>
+            <div class="header-row">
+                <label for="salesAgentName">Sales Agent Name:</label>
+            </div>
+            <div class="flex-container">
+                <input type="text" id="salesAgentName" name="salesAgentName">
+                <button type="button" class="square-button" onclick="setDefault('salesAgentName')">&#x2714;</button>
+            </div><br><br>
 
-            <label for="salesAgentEmail">Sales Agent Email:</label>
-            <input type="email" id="salesAgentEmail" name="salesAgentEmail"><br><br>
+            <div class="header-row">
+                <label for="salesAgentEmail">Sales Agent Email:</label>
+            </div>
+            <div class="flex-container">
+                <input type="email" id="salesAgentEmail" name="salesAgentEmail">
+                <button type="button" class="square-button" onclick="setDefault('salesAgentEmail')">&#x2714;</button>
+            </div><br><br>
 
-            <label for="salesAgentTitle">Sales Agent Title:</label>
-            <input type="text" id="salesAgentTitle" name="salesAgentTitle"><br><br>
+            <div class="header-row">
+                <label for="salesAgentTitle">Sales Agent Title:</label>
+            </div>
+            <div class="flex-container">
+                <input type="text" id="salesAgentTitle" name="salesAgentTitle">
+                <button type="button" class="square-button" onclick="setDefault('salesAgentTitle')">&#x2714;</button>
+            </div><br><br>
 
             <button type="button" onclick="generateUrlAndRedirect()">Submit</button>
         </form>
@@ -69,6 +115,26 @@
             return now.getFullYear().toString().slice(-2);
         }
 
+        // Function to set the default value for any field
+        function setDefault(fieldId) {
+            const fieldValue = document.getElementById(fieldId).value;
+            localStorage.setItem(fieldId, fieldValue);
+        }
+
+        // Function to load the default value for any field from localStorage
+        function loadDefaultValues() {
+            const fields = ['customerName', 'customerAddress', 'entityType', 'signersName', 'title', 'customerEmail', 'salesAgentName', 'salesAgentEmail', 'salesAgentTitle'];
+            fields.forEach(fieldId => {
+                const savedValue = localStorage.getItem(fieldId);
+                if (savedValue) {
+                    document.getElementById(fieldId).value = savedValue;
+                }
+            });
+        }
+
+        // Load the default values when the page loads
+        window.onload = loadDefaultValues;
+
         // Function to generate the full URL and redirect
         function generateUrlAndRedirect() {
             // PowerForm URL base with embedded Admin_UserName and Admin_Email
@@ -86,7 +152,7 @@
             const salesAgentTitle = document.getElementById("salesAgentTitle").value;
 
             // Generate the full URL with all required data
-            const fullUrl = `${powerFormBaseUrl}&Month=${getCurrentMonth()}&Day=${getCurrentDay()}&YY=${getCurrentYear()}&Customer=${encodeURIComponent(customerBusinessName)}&customerAddress=${encodeURIComponent(customerAddress)}&Entity%20Type=${encodeURIComponent(entityType)}&Customer_UserName=${encodeURIComponent(signersName)}&CustomerUsername=${encodeURIComponent(signersName)}&title=${encodeURIComponent(title)}&Customer_Email=${encodeURIComponent(customerEmail)}&Company_UserName=${encodeURIComponent(salesAgentName)}&CompanyUsername=${encodeURIComponent(salesAgentName)}&Company_Email=${encodeURIComponent(salesAgentEmail)}&Title0=${encodeURIComponent(salesAgentTitle)}`;
+            const fullUrl = `${powerFormBaseUrl}&Month=${getCurrentMonth()}&Day=${getCurrentDay()}&YY=${getCurrentYear()}&Customer=${encodeURIComponent(customerBusinessName)}&customerAddress=${encodeURIComponent(customerAddress)}&Entity%20Type=${encodeURIComponent(entityType)}&Customer_UserName=${encodeURIComponent(signersName)}&CustomerUsername=${encodeURIComponent(signersName)}&title=${encodeURIComponent(title)}&Customer_Email=${encodeURIComponent(customerEmail)}&Company_UserName=${encodeURIComponent(salesAgentName)}&CompanyUserName=${encodeURIComponent(salesAgentName)}&Company_Email=${encodeURIComponent(salesAgentEmail)}&Title0=${encodeURIComponent(salesAgentTitle)}`;
 
             // Redirect to the generated URL
             window.location.href = fullUrl;
